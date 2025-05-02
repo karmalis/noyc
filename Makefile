@@ -8,7 +8,7 @@
 
 build: clean
 	mkdir -p bin
-	gcc -ggdb -std=gnu11 -flto -lrt -o bin/noyc src/main.c -I.
+	gcc -ggdb -std=gnu11 -flto -lrt -lm -o bin/noyc src/main.c src/img.c src/iperlin.c -I.
 
 run:
 	./bin/noyc
