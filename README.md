@@ -19,12 +19,9 @@ Current implementation is bare minimum. Which is ton generate an `example.tif` f
 
 ## Notable examples
 
-`noyc 8 0.55 0.005 1.5`
-![Example 1](img/example_1.tif)
+`noyc 8 0.55 0.005 1.5` - see `img/example_1.tif`
 
-`noyc 8 0.75 0.00095 0.5`
-![Example 2](img/example_2.tif)
+`noyc 8 0.75 0.00095 0.5` - see `img/example_2.tif`
 
-`noyc 1 0.50 0.0125 1.`
-![Example2](img/example_3.tif)
+`noyc 1 0.50 0.0125 1.` - see `img/example_3.tif`
 
