@@ -4,21 +4,31 @@
 #include <stdint.h>
 #include <wayland-client.h>
 
+#include "input.h"
 #include "xdg-shell-protocol.h"
 
 struct app_state {
     struct wl_compositor* compositor;
     struct wl_shm* shm;
-    struct wl_shell* shell;
     struct wl_display* display;
     struct wl_registry *registry;
+    struct wl_seat* seat;
     // XDG stuff
     struct xdg_wm_base* xdg_wm_base;
+    struct wl_keyboard* keyboard;
+    struct wl_pointer* pointer;
     struct wl_surface* surface;
     struct xdg_surface *xdg_surface;
     struct xdg_toplevel *xdg_toplevel;
     // Pixels
     uint32_t* pixels;
+
+    int regenerate;
+
+    struct pointer_event pointer_event;
+    struct xkb_state* xkb_state;
+    struct xkb_context* xkb_context;
+    struct xkb_keymap* xkb_keymap;
 };
 
 static void registry_handle_global(void *data, struct wl_registry* registry,

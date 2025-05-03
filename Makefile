@@ -12,8 +12,14 @@ build_noyc: clean
 
 build_noysway: clean
 	mkdir -p bin
-	gcc -ggdb -std=gnu11 -flto -lrt -lm -lwayland-client -o bin/noysway src/noysway.c src/iperlin.c src/wayland/buffer.c src/wayland/xdg-shell-protocol.c -I.
-
+	gcc -ggdb -std=gnu11 -flto -lrt -lm -lwayland-client -lxkbcommon -o bin/noysway \
+		src/noysway.c \
+		src/iperlin.c \
+		src/wayland/xdg-shell-protocol.c \
+		src/wayland/sharedmem.c \
+		src/wayland/input.c \
+		src/wayland/wayland.c \
+	-I.
 
 clean:
 	rm -rf ./bin/*
