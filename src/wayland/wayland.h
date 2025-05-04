@@ -13,12 +13,14 @@ struct app_state {
     struct wl_display* display;
     struct wl_registry *registry;
     struct wl_seat* seat;
-    // XDG stuff
-    struct xdg_wm_base* xdg_wm_base;
+
     struct wl_keyboard* keyboard;
     struct wl_pointer* pointer;
     struct wl_surface* surface;
-    struct xdg_surface *xdg_surface;
+
+    // XDG stuff
+    struct xdg_wm_base* xdg_wm_base;
+     struct xdg_surface *xdg_surface;
     struct xdg_toplevel *xdg_toplevel;
     // Pixels
     uint32_t* pixels;

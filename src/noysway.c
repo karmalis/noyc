@@ -76,6 +76,7 @@ static const struct xdg_surface_listener xdg_surface_listener = {
 
 static const struct wl_callback_listener wl_surface_frame_listener;
 
+// Example of a regenerating callback
 static void wl_surface_frame_done(void* data, struct wl_callback* cb, uint32_t time) {
     wl_callback_destroy(cb);
     struct app_state* state = (struct app_state*) data;
@@ -83,27 +84,6 @@ static void wl_surface_frame_done(void* data, struct wl_callback* cb, uint32_t t
     cb = wl_surface_frame(state->surface);
     wl_callback_add_listener(cb, &wl_surface_frame_listener, state);
 
-    if (state->regenerate) {
-        fprintf(stderr, "Regenerating\n");
-
-          // 8 0.75 0.00095 0.5 initial values
-        int octaves = 2;
-        double per = 0.25;
-        double bfreq = 0.00095;
-        double bamp = 0.5;
-
-        int width = 1024;
-        int height = 1024;
-
-        generate_noise(width, height, octaves, per, bfreq, bamp, state->pixels);
-
-        struct wl_buffer* buffer = draw_frame(state);
-        wl_surface_attach(state->surface, buffer, 0, 0);
-        wl_surface_damage_buffer(state->surface, 0, 0, INT32_MAX, INT32_MAX);
-        wl_surface_commit(state->surface);
-
-        state->regenerate = 0;
-    }
 }
 
 static const struct wl_callback_listener wl_surface_frame_listener = {
@@ -163,6 +143,29 @@ int main(int argc, char** argv) {
 
     while (wl_display_dispatch(state.display)) {
         struct pointer_event* event = &state.pointer_event;
+
+        if (state.regenerate) {
+            fprintf(stderr, "Regenerating\n");
+
+            // 8 0.75 0.00095 0.5 initial values
+            int octaves = 2;
+            double per = 0.25;
+            double bfreq = 0.00095;
+            double bamp = 0.5;
+
+            int width = 1024;
+            int height = 1024;
+
+            generate_noise(width, height, octaves, per, bfreq, bamp, state.pixels);
+
+            struct wl_buffer* buffer = draw_frame(&state);
+            wl_surface_attach(state.surface, buffer, 0, 0);
+            wl_surface_damage_buffer(state.surface, 0, 0, INT32_MAX, INT32_MAX);
+            wl_surface_commit(state.surface);
+
+            state.regenerate = 0;
+
+        }
     }
 
     wl_display_disconnect(display);

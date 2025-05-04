@@ -61,8 +61,7 @@ static const struct wl_seat_listener wl_seat_listener = {
 .name = wl_seat_name
 };
 
-static void
-registry_handle_global(void *data, struct wl_registry* registry,
+static void registry_handle_global(void *data, struct wl_registry* registry,
                        uint32_t name, const char* interface, uint32_t version) {
     struct app_state* state = data;
     if (strcmp(interface, wl_compositor_interface.name) == 0) {
@@ -82,8 +81,7 @@ registry_handle_global(void *data, struct wl_registry* registry,
     }
 }
 
-static void
-registry_handle_global_remove(void *data, struct wl_registry *registry,
+static void registry_handle_global_remove(void *data, struct wl_registry *registry,
                               uint32_t name) {
     // temporary blank
 }
