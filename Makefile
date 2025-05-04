@@ -16,8 +16,9 @@ build_noysway: clean
 		src/noysway.c \
 		src/iperlin.c \
 		src/wayland/xdg-shell-protocol.c \
-		src/wayland/sharedmem.c \
-		src/wayland/input.c \
+		src/sharedmem.c \
+	-I.
+#		src/wayland/input.c \
 		src/wayland/wayland.c \
 	-I.
 
